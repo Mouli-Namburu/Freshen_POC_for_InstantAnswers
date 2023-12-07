@@ -18,6 +18,7 @@ class SearchRepository{
       if(query ==  "Highspot ?"){
         return Success("highspot is a sales enable platfrom");
       }else{
+        // for test purpose add the url directly here
         final response = await _dio.get('https://app.latest.highspot.com/api/v1/search/qa?q=&query');
         //'https://postman-echo.com/get?test=$query'
         return await HttpResponseParser().parseHttpResponse(response, (jsonBody) {
