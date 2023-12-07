@@ -37,15 +37,22 @@ class SearchPage extends HookConsumerWidget{
 }
 
 Widget _buildSearchContent(NetworkResult<String> result) {
-  if (result is Loading) {
-    return CircularProgressIndicator(); // Show loading spinner
-  } else if (result is Success) {
-    return SearchResults(searchResults: result.data!!); // Show search results
-  } else if (result is Error) {
-    return Text(result.message ?? 'Error fetching data'); // Show error message
-  } else {
-    return SizedBox.shrink(); // Default to an empty container
+
+  switch(result){
+   case Loading() :{
+     return CircularProgressIndicator();
   }
+    case Success():{
+      return SearchResults(searchResults: result.data!!);
+    }
+    case Error():{
+      return Text(result.message ?? 'Error fetching data');
+    }
+    default:{
+      return SizedBox.shrink();
+    }
+  }
+
 }
 
 class SearchBox extends StatelessWidget {
