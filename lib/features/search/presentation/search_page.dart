@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/features/search/presentation/search_view_model.dart';
 import 'package:untitled/shared/data/network_result.dart';
 
-import '../provider/provider.dart';
+import '../diProvider/provider.dart';
 
 
 

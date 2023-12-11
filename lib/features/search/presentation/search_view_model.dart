@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:untitled/features/search/domain/search_use_case.dart';
 import 'package:untitled/shared/data/network_result.dart';
 
-import '../provider/provider.dart';
+import '../diProvider/provider.dart';
 
 
 final searchViewModelProvider = ChangeNotifierProvider((ref) => SearchViewModel(ref));
