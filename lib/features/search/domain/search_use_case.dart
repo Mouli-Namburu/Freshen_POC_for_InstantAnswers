@@ -3,7 +3,7 @@ import 'package:untitled/features/search/data/search_repository.dart';
 import 'package:untitled/shared/data/network_result.dart';
 import 'package:untitled/shared/dio_provider.dart';
 
-final searchUseCaseProvider = Provider((ref) => SearchUseCase(ref));
+
 
 class SearchUseCase {
    final ProviderRef<Object?> _ref;

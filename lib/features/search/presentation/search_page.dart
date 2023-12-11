@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:untitled/features/search/presentation/search_view_model.dart';
 import 'package:untitled/shared/data/network_result.dart';
 
+import '../provider/provider.dart';
 
-final searchQueryProvider = Provider<String>((ref) => ref.watch(searchViewModelProvider).searchQuery);
-final searchResultsProvider = Provider<NetworkResult<String>>((ref) => ref.watch(searchViewModelProvider).searchResults);
+
+
 
 class SearchPage extends HookConsumerWidget{
 
