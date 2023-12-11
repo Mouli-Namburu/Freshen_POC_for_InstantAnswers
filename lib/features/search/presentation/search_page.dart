@@ -1,9 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled/features/search/presentation/search_view_model.dart';
 import 'package:untitled/shared/data/network_result.dart';
-
-import '../diProvider/provider.dart';
+import '../injection/injection_provider.dart';
 
 
 
