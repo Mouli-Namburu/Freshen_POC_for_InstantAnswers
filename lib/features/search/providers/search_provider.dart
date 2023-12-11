@@ -1,34 +1,41 @@
-import 'package:flutter/material.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:untitled/features/search/domain/search_use_case.dart';
-import 'package:untitled/features/search/injection/injection_provider.dart';
 import 'package:untitled/shared/data/network_result.dart';
 
 
-class SearchProvider extends ChangeNotifier {
-  final ChangeNotifierProviderRef<Object?> _ref;
+class SearchState{
+  final String searchQuery;
+  final NetworkResult<String> searchResults;
+
+  SearchState(this.searchQuery,this.searchResults);
+
+  SearchState copyWith({String? searchQuery, NetworkResult<String>? searchResults}) {
+    return SearchState(
+      searchQuery ?? this.searchQuery,
+      searchResults ?? this.searchResults,
+    );
+  }
+}
+
+class SearchProvider extends StateNotifier<SearchState> {
+
   final SearchUseCase _searchUseCase;
 
-  SearchProvider(this._ref) : _searchUseCase = _ref.read(searchUseCaseProvider);
+  SearchProvider(this._searchUseCase)
+      : super(SearchState('', Success('')));
 
-  String _searchQuery = '';
-  NetworkResult<String> _searchResults = Success("");
-
-  String get searchQuery => _searchQuery;
-  NetworkResult<String> get searchResults => _searchResults;
-
-  set searchQuery(String query) {
-    _searchQuery = query;
-    notifyListeners();
+  void updateSearchQuery(String query) {
+    state = state.copyWith(searchQuery: query);
   }
 
-  Future<void> search(query) async {
+  Future<void> search(String query) async {
     try {
-      _searchResults = await _searchUseCase.search(query);
+      final results = await _searchUseCase.search(query);
+      state = state.copyWith(searchResults: results);
     } catch (error) {
       print('Error: $error');
+      state = state.copyWith(searchResults: Error("$error"));
     }
-
-    notifyListeners();
   }
 }

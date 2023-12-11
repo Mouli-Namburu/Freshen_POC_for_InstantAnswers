@@ -7,10 +7,9 @@ import '../domain/search_use_case.dart';
 import '../providers/search_provider.dart';
 
 
-final searchViewModelProvider = ChangeNotifierProvider((ref) => SearchProvider(ref));
 
-final searchQueryProvider = Provider<String>((ref) => ref.watch(searchViewModelProvider).searchQuery);
-
-final searchResultsProvider = Provider<NetworkResult<String>>((ref) => ref.watch(searchViewModelProvider).searchResults);
-
+final searchProvider = StateNotifierProvider((ref) => SearchProvider(ref.watch(searchUseCaseProvider)));
 final searchUseCaseProvider = Provider((ref) => SearchUseCase(ref));
+
+
+

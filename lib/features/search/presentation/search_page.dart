@@ -2,9 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/shared/data/network_result.dart';
 import '../injection/injection_provider.dart';
-
-
-
+import '../providers/search_provider.dart';
 
 class SearchPage extends HookConsumerWidget{
 
@@ -12,10 +10,8 @@ class SearchPage extends HookConsumerWidget{
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final searchQuery = ref.watch(searchQueryProvider);
-    final searchResults = ref.watch(searchResultsProvider);
-    final searchViewModel = ref.read(searchViewModelProvider);
-
+    final mSearchProviderState = ref.watch(searchProvider) as SearchState;
+    final mSearchProvider = ref.read(searchProvider.notifier);
 
    return Scaffold(
      appBar: AppBar(
@@ -24,10 +20,10 @@ class SearchPage extends HookConsumerWidget{
      body: Column(
        children: [
          SearchBox(
-           searchQuery: searchQuery,
-           onSearch:(query) => searchViewModel.search(query),
+           searchQuery: mSearchProviderState.searchQuery,
+           onSearch:(query) => mSearchProvider.search(query),
          ),
-         _buildSearchContent(searchResults),
+         _buildSearchContent(mSearchProviderState.searchResults),
        ],
      ),
    );
